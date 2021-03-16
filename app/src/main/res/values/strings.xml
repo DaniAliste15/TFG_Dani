@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Login</string>
+    <string name="title_activity_mapa">Map</string>
+
+    <string name="title_activity_mapa_admin">Map</string>
+
+    <string-array name="vegetacion">
+        <item>Seleccione</item>
+        <item>Pastizal</item>
+        <item>Matorral</item>
+        <item>Pinar</item>
+        <item>Frondosas</item>
+    </string-array>
+
+    <string-array name="columna">
+        <item>Seleccione</item>
+        <item>Recta</item>
+        <item>Tumbada</item>
+        <item>Muy tumbada</item>
+    </string-array>
+    <string-array name="humos">
+        <item>Seleccione</item>
+        <item>Blanco</item>
+        <item>Amarillo</item>
+        <item>Negro</item>
+        <item>Gris</item>
+    </string-array>
+</resources>

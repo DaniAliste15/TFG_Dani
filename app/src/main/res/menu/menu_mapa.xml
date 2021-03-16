@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MapaActivity">
+
+    <item android:id="@+id/miCuenta"
+        android:title="Mi cuenta"/>
+
+    <item android:id="@+id/infoMapa"
+        android:title="Ayuda mapa"/>
+
+    <item android:id="@+id/elimIn"
+        android:title="Eliminar Incendio"/>
+
+    <item android:id="@+id/salir"
+        android:title="Cerrar sesion"/>
+
+    <item android:id="@+id/elimCuenta"
+        android:title="Eliminar cuenta"/>
+
+    <item android:id="@+id/modifDados"
+        android:title="Modificar datos"/>
+
+    <item android:id="@+id/listaIncendios"
+        android:title="Ver ult. incendio detectado"/>
+
+</menu>
