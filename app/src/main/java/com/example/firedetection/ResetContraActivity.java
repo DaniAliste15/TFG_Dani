@@ -1,4 +1,4 @@
-package com.example.login;
+package com.example.firedetection;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,8 +49,6 @@ public class ResetContraActivity extends AppCompatActivity {
                     resetPassword();
                 }
                 else {
-                    //Toast.makeText(ResetContraActivity.this, "Debe ingresar un Email", Toast.LENGTH_SHORT).show();
-
                     editTextEmail.setError("Debe ingresar un email");
                 }
                           }

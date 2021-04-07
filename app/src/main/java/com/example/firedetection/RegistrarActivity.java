@@ -1,4 +1,4 @@
-package com.example.login;
+package com.example.firedetection;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -154,8 +154,6 @@ public class RegistrarActivity extends AppCompatActivity {
                     AlertDialog titulo = alerta.create();
                     titulo.setTitle("Atención");
                     titulo.show();
-                    /*.makeText(RegistrarActivity.this, "No se ha podido registar dicho usuario." +
-                            "Asegurese de que el EMAIL cumple con toda su sintaxis" + "¡CUIDADO CON LOS ESPACIOS AL FINAL!", Toast.LENGTH_LONG).show();*/
                 }
                 barra.dismiss();
             }
@@ -163,15 +161,4 @@ public class RegistrarActivity extends AppCompatActivity {
         });
 
     }
-
-
-  /* @Override
-    protected void onStart() {
-        super.onStart();
-
-        if(Auth.getCurrentUser() != null) {
-            startActivity(new Intent(MainActivity.this,MapaActivity.class));
-            finish();
-        }
-    }*/
 }

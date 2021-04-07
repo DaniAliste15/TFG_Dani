@@ -1,4 +1,4 @@
-package com.example.login;
+package com.example.firedetection;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,6 @@ public class InfoDatosIncendioActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info_pantalla2);
+        setContentView(R.layout.activity_info_datos);
     }
 }

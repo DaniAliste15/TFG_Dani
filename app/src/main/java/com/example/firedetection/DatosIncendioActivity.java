@@ -1,4 +1,4 @@
-package com.example.login;
+package com.example.firedetection;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +23,6 @@ import java.math.MathContext;
 
 public class DatosIncendioActivity extends AppCompatActivity  {
 
-    //private Button mbutsigout;
     private FirebaseAuth mAuth;
     public TextView tvCoord;
     private Spinner spinnerHumo,spinnerVegetacion,spinnerColumna;
@@ -35,7 +34,7 @@ public class DatosIncendioActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pantalla2);
+        setContentView(R.layout.activity_datos);
 
         recibirDatos();
 
@@ -45,24 +44,6 @@ public class DatosIncendioActivity extends AppCompatActivity  {
         spinnerVegetacion = (Spinner) findViewById(R.id.spiVegetacion);
         spinnerColumna = (Spinner) findViewById(R.id.spiColumna);
         enviarAviso = (Button) findViewById(R.id.enviarAviso);
-
-       /* ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.spinner_humo,android.R.layout.simple_spinner_item);
-        spinnerHumo.setAdapter(adapter);*/
-
-        /*//Spinner Humo
-        String[] tipoHumo = {"Seleccione","Blanco","Amarillo","Negro","Gris"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,tipoHumo);
-        spinnerHumo.setAdapter(adapter);*/
-
-        /*//Spinner Vegetacion
-        String[] tipoVegetacion = {"Pastizal","Matorral","Pinares","Matorral arbustivo"};
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,tipoVegetacion);
-        spinnerVegetacion.setAdapter(adapter1);
-
-        //Spinner Columna
-        String[] tipoColumna = {"Recta","Tumbada"};
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,tipoColumna);
-        spinnerColumna.setAdapter(adapter2);*/
 
         //HUMO
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.humos,R.layout.spinner_modificacion);
@@ -140,9 +121,7 @@ public class DatosIncendioActivity extends AppCompatActivity  {
 
 
     }
-    //blanco amarillo negro gris
-    // pastizal matorral resinosas frondosal matorral arbusto
-    //tumbada recta
+
     private void recibirDatos() {
         tvCoord = (TextView) findViewById(R.id.tvCoord);
         Bundle extras = getIntent().getExtras();
@@ -162,13 +141,6 @@ public class DatosIncendioActivity extends AppCompatActivity  {
     }
 
     public boolean onCreateOptionsMenu(Menu mimenu) {
-
-          /*OTRA FORMA DE HACERLO
-          MenuInflater inflater = getMenuInflater();
-          inflater.inflate(R.menu.menu_en_activity,mimenu);
-
-        return super.onCreateOptionsMenu(mimenu);*/
-
           getMenuInflater().inflate(R.menu.menu_en_activity,mimenu);
           return true;
     }
@@ -207,29 +179,4 @@ public class DatosIncendioActivity extends AppCompatActivity  {
 
         return super.onOptionsItemSelected(opcion_menu);
     }
-
-   /*@Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-       // String hola = parent.getSelectedItem().toString();
-        Toast.makeText(parent.getContext(),"seleccionado:"+parent.getItemAtPosition(position).toString() , Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-*/
-
-   /* @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if(parent.getSelectedItem().toString().equals("Blanco")) {
-                Toast.makeText(this, "blancoooo", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        Toast.makeText(this, "nadaaa", Toast.LENGTH_SHORT).show();
-    }*/
 }

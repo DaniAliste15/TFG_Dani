@@ -1,9 +1,8 @@
-package com.example.login;
+package com.example.firedetection;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -45,14 +44,6 @@ public class IncendiosDetectadosActivity extends AppCompatActivity {
                 publicarIncendios();
             }
         });
-
-
-        /*if(numIncendios == 0) {
-            Toast.makeText(this, "Todavia no ha detectado ningun incendio", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, MapaActivity.class));
-            finish();
-        }*/
-       // Toast.makeText(this, "num:"+numeroIncendios, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -107,12 +98,7 @@ public class IncendiosDetectadosActivity extends AppCompatActivity {
                 if(dataSnapshot.exists()) {
 
                     int numIncendios = Integer.parseInt(dataSnapshot.child("numeroincendios").getValue().toString());
-                    //Toast.makeText(IncendiosDetectadosActivity.this, "num:"+numIncendios, Toast.LENGTH_SHORT).show();
-                    //return numIncendios;
                     numeroIncendios = numIncendios;
-                    //Toast.makeText(IncendiosDetectadosActivity.this, "pepeeee:"+numeroIncendios, Toast.LENGTH_SHORT).show();
-
-
                 }
                 else {
                     Toast.makeText(IncendiosDetectadosActivity.this, "No se pudo obtener el numero de incendios", Toast.LENGTH_SHORT).show();

@@ -1,4 +1,4 @@
-package com.example.login;
+package com.example.firedetection;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.login">
+    package="com.example.firedetection">
 
     <application
         android:allowBackup="true"
@@ -18,40 +18,40 @@
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
         <activity
-            android:name=".MapaAdminActivity"
+            android:name="com.example.firedetection.MapaAdminActivity"
             android:label="@string/title_activity_mapa_admin" />
         <activity
-            android:name=".IncendiosDetectadosActivity"
+            android:name="com.example.firedetection.IncendiosDetectadosActivity"
             android:label="Ultimo incendio detectado"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity
-            android:name=".InfoDatosIncendioActivity"
+            android:name="com.example.firedetection.InfoDatosIncendioActivity"
             android:label=""
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity
-            android:name=".InfoMapaActivity"
+            android:name="com.example.firedetection.InfoMapaActivity"
             android:label=""
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity
-            android:name=".MiCuentaActivity"
+            android:name="com.example.firedetection.MiCuentaActivity"
             android:label="Datos"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity
-            android:name=".ModfiDatosActivity"
+            android:name="com.example.firedetection.ModfiDatosActivity"
             android:label="Modificar datos"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".EnviadoAvisoActivity"
+            android:name="com.example.firedetection.EnviadoAvisoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ValidacionActivity"
+            android:name="com.example.firedetection.ValidacionActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MapaActivity"
+            android:name="com.example.firedetection.MapaActivity"
             android:screenOrientation="portrait" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -62,11 +62,11 @@
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
         <activity
-            android:name=".ResetContraActivity"
+            android:name="com.example.firedetection.ResetContraActivity"
             android:label="Restablecer contraseña"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LoginActivity"
+            android:name="com.example.firedetection.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -75,10 +75,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DatosIncendioActivity"
+            android:name="com.example.firedetection.DatosIncendioActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".RegistrarActivity"
+            android:name="com.example.firedetection.RegistrarActivity"
             android:label="Registrar usuario"
             android:screenOrientation="portrait" />
 

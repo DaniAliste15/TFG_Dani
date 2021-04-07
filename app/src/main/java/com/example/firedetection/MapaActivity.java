@@ -1,4 +1,4 @@
-package com.example.login;
+package com.example.firedetection;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -180,48 +180,6 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
        // mMap.setOnMapLongClickListener(this);
     }
 
-    /*@Override
-    public void onMapClick(LatLng point) {
-        Toast.makeText(this, "pinchado", Toast.LENGTH_LONG).show();
-        //mTapTextView.setText("Punto marcado=" + point);
-
-        if(f_pinchado != 0) {
-            incendio_clic.remove();
-        }
-        //////////
-        LatLng click = new LatLng(point.latitude,point.longitude);
-        incendio_clic = mMap.addMarker(new MarkerOptions().position(click).title("Pinchado")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-        ///////////////////
-
-
-        if(f_presionado != 0){
-            incendio_longclic.remove();
-        }
-
-        f_pinchado = 1;
-    }*/
-
-    /*@Override
-    public void onMapLongClick(LatLng point) {
-        //mTapTextView.setText("Punto, presionado=" + point);
-
-        if(f_presionado != 0) {
-            incendio_longclic.remove();
-        }
-        //////////
-        LatLng click = new LatLng(point.latitude,point.longitude);
-        incendio_longclic = mMap.addMarker(new MarkerOptions().position(click).title("Presionado")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-        ///////////////////
-
-        if(f_pinchado != 0){
-            incendio_clic.remove();
-        }
-
-        f_presionado = 1;
-    }*/
-
     private void setUpMapIfNeeded() {
         // Hacer una comprobación nula para confirmar que ya no hemos instanciado el mapa.
         if (mMap == null) {
@@ -267,9 +225,6 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                     incendio.remove();
                 }
                 incendio = mMap.addMarker(new MarkerOptions().position(sydney25).title(b1.round(m)+" / "+b2.round(m)));
-                /*PROBAR PORUQE NO VA
-                hola = mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource
-                        (R.mipmap.ic_fuego)).anchor(0.0f,1.0f).position(sydney25).title(lati +" / "+longi));*/
                 f_clik=1;
             }
         });
@@ -296,13 +251,6 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     @Override public boolean onCreateOptionsMenu(Menu mimenu) {
-
-          /*OTRA FORMA DE HACERLO
-          MenuInflater inflater = getMenuInflater();
-          inflater.inflate(R.menu.menu_en_activity,mimenu);
-
-        return super.onCreateOptionsMenu(mimenu);*/
-
         getMenuInflater().inflate(R.menu.menu_mapa,mimenu);
         return true;
     }
