@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.firedetection">
+    package="com.dani.firedetection">
 
     <application
         android:allowBackup="true"
@@ -18,40 +18,40 @@
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
         <activity
-            android:name="com.example.firedetection.MapaAdminActivity"
+            android:name="com.dani.firedetection.MapaAdminActivity"
             android:label="@string/title_activity_mapa_admin" />
         <activity
-            android:name="com.example.firedetection.IncendiosDetectadosActivity"
+            android:name="com.dani.firedetection.IncendiosDetectadosActivity"
             android:label="Ultimo incendio detectado"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity
-            android:name="com.example.firedetection.InfoDatosIncendioActivity"
+            android:name="com.dani.firedetection.InfoDatosIncendioActivity"
             android:label=""
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity
-            android:name="com.example.firedetection.InfoMapaActivity"
+            android:name="com.dani.firedetection.InfoMapaActivity"
             android:label=""
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity
-            android:name="com.example.firedetection.MiCuentaActivity"
+            android:name="com.dani.firedetection.MiCuentaActivity"
             android:label="Datos"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity
-            android:name="com.example.firedetection.ModfiDatosActivity"
+            android:name="com.dani.firedetection.ModfiDatosActivity"
             android:label="Modificar datos"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.firedetection.EnviadoAvisoActivity"
+            android:name="com.dani.firedetection.EnviadoAvisoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.firedetection.ValidacionActivity"
+            android:name="com.dani.firedetection.ValidacionActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.firedetection.MapaActivity"
+            android:name="com.dani.firedetection.MapaActivity"
             android:screenOrientation="portrait" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -62,11 +62,11 @@
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
         <activity
-            android:name="com.example.firedetection.ResetContraActivity"
+            android:name="com.dani.firedetection.ResetContraActivity"
             android:label="Restablecer contraseña"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.firedetection.LoginActivity"
+            android:name="com.dani.firedetection.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -75,10 +75,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.firedetection.DatosIncendioActivity"
+            android:name="com.dani.firedetection.DatosIncendioActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.firedetection.RegistrarActivity"
+            android:name="com.dani.firedetection.RegistrarActivity"
             android:label="Registrar usuario"
             android:screenOrientation="portrait" />
 

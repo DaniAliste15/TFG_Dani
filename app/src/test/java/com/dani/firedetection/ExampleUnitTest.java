@@ -1,4 +1,4 @@
-package com.example.firedetection;
+package com.dani.firedetection;
 
 import org.junit.Test;
 

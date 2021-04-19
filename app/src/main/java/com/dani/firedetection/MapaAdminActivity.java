@@ -1,4 +1,4 @@
-package com.example.firedetection;
+package com.dani.firedetection;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -14,10 +14,13 @@ import android.app.TaskStackBuilder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -33,6 +36,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 
 public class MapaAdminActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -40,7 +45,9 @@ public class MapaAdminActivity extends AppCompatActivity implements OnMapReadyCa
     private GoogleMap mMap;
     FirebaseAuth mAutho;
     DatabaseReference Database;
-    private int flag = 0;
+    private int flag,f_mapa = 0;
+
+    private Button btnHibrido,btnTerreno;
 
     private PendingIntent pendingIntent;
     private final static String CHANNEL_ID = "NOTIFICACION";
@@ -48,6 +55,7 @@ public class MapaAdminActivity extends AppCompatActivity implements OnMapReadyCa
 
     private ArrayList<Marker> tmpRealTimeMarkers = new ArrayList<>();
     private ArrayList<Marker> realTimeMarkers = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +66,40 @@ public class MapaAdminActivity extends AppCompatActivity implements OnMapReadyCa
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        //icono en el action bar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+        /////************/////
+        //Color ActionBar
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorAdmin )));
+        /////***********////
+
         mAutho = FirebaseAuth.getInstance();
         Database = FirebaseDatabase.getInstance().getReference();
+
+        btnHibrido = (Button) findViewById(R.id.btnHib);
+        btnTerreno = (Button) findViewById(R.id.btnTerr);
+
+        asignaValor();
+
+        btnHibrido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+            }
+        });
+
+        btnTerreno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+            }
+        });
+    }
+
+
+    private void asignaValor() {
+        flag = 1;
     }
 
     private void setPendingIntent() {
@@ -82,13 +122,14 @@ public class MapaAdminActivity extends AppCompatActivity implements OnMapReadyCa
     private void createNotificacion() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),CHANNEL_ID);
         builder.setSmallIcon(R.drawable.ic_whatshot_black_24dp);
-        builder.setContentTitle("Noticacion");
-        builder.setContentText("Esto es un prueba a ver como sale");
+        builder.setContentTitle("Atencion");
+        builder.setContentText("Tiene usted un posible incendio");
         builder.setColor(Color.BLUE);
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         builder.setLights(Color.GREEN, 1000,1000);
         builder.setVibrate(new long[]{1000,1000,1000,1000});
         builder.setDefaults(Notification.DEFAULT_SOUND);
+        builder.setAutoCancel(true);
 
         builder.setContentIntent(pendingIntent);
 
@@ -111,52 +152,14 @@ public class MapaAdminActivity extends AppCompatActivity implements OnMapReadyCa
         mMap = googleMap;
         mMap.getUiSettings().setZoomControlsEnabled(true); //zoom + -
         String id = "fR9J3z0qhwNGVRUcjU66KIYpA2F2";
-        //String id = mAutho.getCurrentUser().getUid(); //obtener el id del usuario
 
-        /*Database.child("Listado incendios").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    TraerLatLong mp = snapshot.getValue(TraerLatLong.class);
-                    Double latitud = mp.getLatitud();
-                    Double longitud = mp.getLongitud();
+        if (f_mapa == 0) {
+            mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);// para que nos pinte la
+            // vista hibrida solo al principio
+            f_mapa = 1;
+        }
 
-                    LatLng incendio = new LatLng(latitud,longitud);
-
-                    MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(incendio).title(""+latitud+" / "+longitud);
-                    if(latitud != 0.0 && longitud != 0.0) {
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(incendio, 14));
-                    }
-                    tmpRealTimeMarkers.add(mMap.addMarker(markerOptions));
-
-                }
-
-                realTimeMarkers.clear();
-                realTimeMarkers.addAll(tmpRealTimeMarkers);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
         Database.child("Listado incendios").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -169,17 +172,27 @@ public class MapaAdminActivity extends AppCompatActivity implements OnMapReadyCa
                     TraerLatLong mp = snapshot.getValue(TraerLatLong.class);
                     Double latitud = mp.getLatitud();
                     Double longitud = mp.getLongitud();
+                    String humo = mp.getHumo();
+                    String columna = mp.getColumna();
+                    String vegetacion = mp.getVegetacion();
 
                     LatLng incendio = new LatLng(latitud,longitud);
 
+                    /************Ajuste de deciamles***********/
+                    BigDecimal b1 = new BigDecimal(latitud);
+                    BigDecimal b2 = new BigDecimal(longitud);
+                    MathContext m = new MathContext(6);
+                    /*******************************************/
+
                     MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(incendio).title(""+latitud+" / "+longitud);
+                    markerOptions.position(incendio).title("("+""+b1.round(m)+" / "+b2.round(m)+")"
+                            +"  "+humo+" - "+columna+" - "+vegetacion+" ");
+
                     if(latitud != 0.0 && longitud != 0.0) {
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(incendio, 12));
                     }
                     tmpRealTimeMarkers.add(mMap.addMarker(markerOptions));
 
-                    //if(flag != 0) {
                     if(mAutho.getCurrentUser() != null) {
                         String id = mAutho.getCurrentUser().getUid(); //obtener el id del usuario
 
@@ -192,11 +205,12 @@ public class MapaAdminActivity extends AppCompatActivity implements OnMapReadyCa
                                     //nada
                                 }
                                 else if(rol.equals("admin")) {
-                                    if(flag != 0) {
+                                    if(flag != 1) {
                                         setPendingIntent();
                                         createNotificacion2();
                                         createNotificacion();
                                     }
+                                    flag = 0;
                                 }
                             }
 
@@ -213,8 +227,6 @@ public class MapaAdminActivity extends AppCompatActivity implements OnMapReadyCa
                 realTimeMarkers.clear();
                 realTimeMarkers.addAll(tmpRealTimeMarkers);
 
-                flag = 1;
-
             }
 
             @Override
@@ -223,57 +235,8 @@ public class MapaAdminActivity extends AppCompatActivity implements OnMapReadyCa
             }
         });
 
-        // Add a marker in Sydney and move the camera
-        /*LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
     }
 
-    /*public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        mMap.getUiSettings().setZoomControlsEnabled(true); //zoom + -
-
-        Database.child("Users").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for(Marker marker : realTimeMarkers) {
-                    marker.remove();
-                }
-
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    TraerLatLong mp = snapshot.getValue(TraerLatLong.class);
-                    Double latitud = mp.getLatitud();
-                    Double longitud = mp.getLongitud();
-
-                    LatLng incendio = new LatLng(latitud,longitud);
-
-                    MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(incendio).title(""+latitud+" / "+longitud);
-                    if(latitud != 0.0 && longitud != 0.0) {
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(incendio, 14));
-                    }
-                    tmpRealTimeMarkers.add(mMap.addMarker(markerOptions));
-
-                }
-
-                realTimeMarkers.clear();
-                realTimeMarkers.addAll(tmpRealTimeMarkers);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        // Add a marker in Sydney and move the camera
-        /*LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-}
-*/
     @Override public boolean onCreateOptionsMenu(Menu mimenu) {
 
           /*OTRA FORMA DE HACERLO
@@ -313,6 +276,7 @@ public class MapaAdminActivity extends AppCompatActivity implements OnMapReadyCa
 
             return true;
         }
+
         return super.onOptionsItemSelected(opcion_menu);
     }
 }

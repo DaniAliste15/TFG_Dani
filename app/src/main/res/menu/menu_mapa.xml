@@ -15,9 +15,6 @@
     <item android:id="@+id/salir"
         android:title="Cerrar sesion"/>
 
-    <item android:id="@+id/elimCuenta"
-        android:title="Eliminar cuenta"/>
-
     <item android:id="@+id/modifDados"
         android:title="Modificar datos"/>
 

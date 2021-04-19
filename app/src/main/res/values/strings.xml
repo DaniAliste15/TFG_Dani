@@ -2,7 +2,7 @@
     <string name="app_name">Login</string>
     <string name="title_activity_mapa">Map</string>
 
-    <string name="title_activity_mapa_admin">Map</string>
+    <string name="title_activity_mapa_admin">Fire Detection Admin</string>
 
     <string-array name="vegetacion">
         <item>Seleccione</item>

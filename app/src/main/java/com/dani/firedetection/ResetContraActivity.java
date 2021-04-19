@@ -1,4 +1,4 @@
-package com.example.firedetection;
+package com.dani.firedetection;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +27,7 @@ public class ResetContraActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reset_contra);
+        setContentView(R.layout.activity_restable_contra);
 
         editTextEmail = (EditText) findViewById(R.id.textEmail);
         buttonResCon = (Button)findViewById(R.id.btnResContraseña);

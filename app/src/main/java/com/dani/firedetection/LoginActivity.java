@@ -1,4 +1,4 @@
-package com.example.firedetection;
+package com.dani.firedetection;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -34,6 +34,8 @@ public class LoginActivity extends AppCompatActivity {
     private String password = "";
     private String email_b = "";
     private String password_b = "";
+    
+    private int nFirebase = 28;
 
     private FirebaseAuth mAuth;
     private DatabaseReference Database;
@@ -157,38 +159,40 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    @Override
+  @Override
     protected void onStart() {
         super.onStart();
 
         if(mAuth.getCurrentUser() != null) {
-            dialog1.setTitle("Entrando");
-            dialog1.setMessage("Espere...");
-            dialog1.setCanceledOnTouchOutside(false);
-            dialog1.show();
-            String id = mAuth.getCurrentUser().getUid(); //obtener el id del usuario
+                String id = mAuth.getCurrentUser().getUid(); //obtener el id del usuario
 
-            Database.child("Users").child(id).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    String rol = dataSnapshot.child("rol").getValue().toString();
+                dialog1.setTitle("Entrando");
+                dialog1.setMessage("Espere...");
+                dialog1.setCanceledOnTouchOutside(false);
+                dialog1.show();
 
-                    if(rol.equals("usuarionormal")) {
-                        startActivity(new Intent(LoginActivity.this,MapaActivity.class));
-                        finish();
+                Database.child("Users").child(id).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String rol = dataSnapshot.child("rol").getValue().toString();
+
+                        if(rol.equals("usuarionormal")) {
+                            startActivity(new Intent(LoginActivity.this,MapaActivity.class));
+                            finish();
+                        }
+                        else if(rol.equals("admin")) {
+                            startActivity(new Intent(LoginActivity.this,MapaAdminActivity.class));
+                            finish();
+                        }
+                        dialog1.dismiss();
                     }
-                    else if(rol.equals("admin")) {
-                        startActivity(new Intent(LoginActivity.this,MapaAdminActivity.class));
-                        finish();
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
                     }
-                    dialog1.dismiss();
-                }
+                });
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
         }
     }
 }

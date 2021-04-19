@@ -1,4 +1,4 @@
-package com.example.firedetection;
+package com.dani.firedetection;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -296,44 +296,6 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
             return true;
         }
         
-        if(id == R.id.elimCuenta) {
-            idUsuario = mAutho.getCurrentUser().getUid(); //obtener el id del usuario
-
-            final AlertDialog.Builder alerta = new AlertDialog.Builder(MapaActivity.this);
-            alerta.setMessage("¿Desea eliminar la cuenta?")
-                    .setCancelable(false)
-                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Database.child("Users").child(idUsuario).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Toast.makeText(MapaActivity.this, "La cuenta se ha eliminado correctamente", Toast.LENGTH_SHORT).show();
-                                    mAutho.signOut();
-                                    startActivity(new Intent(MapaActivity.this, LoginActivity.class));
-                                    finish();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(MapaActivity.this, "La cuenta no se ha podido eliminar", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-            AlertDialog titulo = alerta.create();
-            titulo.setTitle("Atención");
-            titulo.show();
-
-            return true;
-        }
-
         if(id == R.id.listaIncendios){
             startActivity(new Intent(MapaActivity.this,IncendiosDetectadosActivity.class));
             return true;
