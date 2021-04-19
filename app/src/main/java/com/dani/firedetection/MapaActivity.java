@@ -295,7 +295,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             return true;
         }
-        
+
         if(id == R.id.listaIncendios){
             startActivity(new Intent(MapaActivity.this,IncendiosDetectadosActivity.class));
             return true;
